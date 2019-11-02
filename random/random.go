@@ -2,9 +2,9 @@ package random
 
 import (
 	logging "github.com/braveghost/joker"
+	"github.com/braveghost/meteor/icrypto"
+	"github.com/braveghost/meteor/pool"
 	"github.com/zheng-ji/goSnowFlake"
-	"jdGoBackend/library/icrypto"
-	"jdGoBackend/library/pool"
 	"math/rand"
 	"os"
 	"strconv"
