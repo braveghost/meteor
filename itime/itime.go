@@ -1,6 +1,7 @@
 package itime
 
 import (
+	"strconv"
 	"time"
 )
 
@@ -27,7 +28,7 @@ func NowMinuteStart() int64 {
 }
 func nowMinute() time.Time {
 	timeStr := time.Now().Format("2006-01-02 15:04")
-	t, _ := time.Parse("2006-01-02", timeStr)
+	t, _ := time.ParseInLocation("2006-01-02 15:04", timeStr, time.Local)
 	return t
 }
 
@@ -50,7 +51,7 @@ func NowHourStart() int64 {
 }
 func nowHour() time.Time {
 	timeStr := time.Now().Format("2006-01-02 15")
-	t, _ := time.Parse("2006-01-02", timeStr)
+	t, _ := time.ParseInLocation("2006-01-02 15", timeStr, time.Local)
 	return t
 }
 
@@ -73,7 +74,7 @@ func NowDayStart() int64 {
 }
 func nowDay() time.Time {
 	timeStr := time.Now().Format("2006-01-02")
-	t, _ := time.Parse("2006-01-02", timeStr)
+	t, _ := time.ParseInLocation("2006-01-02", timeStr, time.Local)
 	return t
 }
 
@@ -98,7 +99,7 @@ func NowMonthStart() int64 {
 }
 
 func nowMonth() time.Time {
-	t, _ := time.Parse("2006-01", time.Now().Format("2006-01"))
+	t, _ := time.ParseInLocation("2006-01", time.Now().Format("2006-01"), time.Local)
 	return t
 }
 
@@ -119,5 +120,35 @@ func NextMonthStart() int64 {
 func NextMonthsStart(n int64) int64 {
 	t := nowMonth()
 	tt := t.AddDate(0, int(n), 0)
+	return tt.Unix()
+}
+
+func NowYearStart() int64 {
+	t := nowYear()
+	return t.Unix()
+}
+
+func nowYear() time.Time {
+	t, _ := time.ParseInLocation("2006", strconv.Itoa(time.Now().Year()), time.Local)
+	return t
+}
+
+func LastYearStart() int64 {
+	return LastYearsStart(1)
+}
+
+func LastYearsStart(n int64) int64 {
+	t := nowYear()
+	tt := t.AddDate(int(-n), 0, 0)
+	return tt.Unix()
+}
+
+func NextYearStart() int64 {
+	return NextYearsStart(1)
+}
+
+func NextYearsStart(n int64) int64 {
+	t := nowYear()
+	tt := t.AddDate(int(n), 0, 0)
 	return tt.Unix()
 }
