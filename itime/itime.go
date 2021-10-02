@@ -83,7 +83,7 @@ func LastDayStart() int64 {
 }
 
 func LastDaysStart(n int64) int64 {
-	return NowHourStart() - n*Day
+	return NowDayStart() - n*Day
 }
 func NextDayStart() int64 {
 	return NowDayStart() + Day
